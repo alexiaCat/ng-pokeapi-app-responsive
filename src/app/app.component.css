@@ -1,0 +1,11 @@
+.bg-poke {
+    background-image: url('../assets/img/bg-poke.jpg');
+    background-size: cover;
+
+}
+
+.container {
+    width: 100%;
+    height: calc(100vh - 200px);
+    max-width: none;
+}
