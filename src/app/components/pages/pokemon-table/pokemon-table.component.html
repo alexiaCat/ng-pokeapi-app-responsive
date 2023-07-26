@@ -1,0 +1,61 @@
+<div class="flex">
+  <div class="w-[60%] p-4">
+    <div class="relative pb-2">
+      <input type="text" (input)="setFilterAndSearch(txtBuscar.value)" class="w-full px-4 py-2 rounded-l focus:outline-none focus:ring focus:border-blue-300"
+        placeholder="Escribe el nombre del pokemón a buscar" #txtBuscar/>
+    </div>
+    <table class="table-auto border-collapse border border-gray-500">
+      <thead>
+        <tr class="bg-red-500">
+          <th class="px-4 py-2 border border-neutral-950 w-2/3 text-white">Nombre Pokemón</th>
+          <th class="px-4 py-2 border border-neutral-950 text-white">Marcar como favorito</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pokemon of pokemons" class="bg-amber-100">
+          <td (click)="onPokemonClicked(pokemon)" class="hover:font-bold px-4 py-2 border border-neutral-950">{{ pokemon.name }}</td>
+          <td (click)="toggleFavorite(pokemon)" class="px-4 py-2 border border-neutral-950">
+            <span class="flex justify-center items-center">
+              <i [style.color]="pokemon.isFavorite ? 'red' : 'white'" class="fas fa-heart"></i>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    
+
+
+
+    <div class="flex flex-col items-center">
+      <div class="flex mt-2 xs:mt-0 items-center justify-between">
+        <!-- Buttons -->
+        <button (click)="previousPage()"
+          class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+          <svg class="w-3.5 h-3.5 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 14 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M13 5H1m0 0 4 4M1 5l4-4" />
+          </svg>
+          Anterior
+        </button>
+        <button (click)="changePage(offset + limit)"
+          class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+          Siguiente
+          <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 14 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M1 5h12m0 0L9 1m4 4L9 9" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="w-[30%]">
+    <app-pokemon-details></app-pokemon-details>
+  </div>
+</div>

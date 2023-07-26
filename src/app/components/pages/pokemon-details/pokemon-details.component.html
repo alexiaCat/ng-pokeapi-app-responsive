@@ -1,0 +1,9 @@
+<p class="text-white text-[25px] mt-2">Click a el nombre de un pokemón para ver sus detalles</p>
+<div class="bg-white shadow-md rounded-lg p-4" *ngIf="selectedPokemon">
+  <img [src]="selectedPokemon.sprites?.other?.dream_world?.front_default" alt="Pokemon" class="w-full h-50 object-contain mb-4">
+
+  <h2 class="text-xl font-bold mb-2">{{ selectedPokemon.name | uppercase }}</h2>
+  <span class="bg-pink-100 text-pink-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-pink-900 dark:text-pink-300">{{ selectedPokemon.types[0]?.type.name }}</span>
+
+  <p class="text-gray-600 text-sm">Altura: {{ selectedPokemon.height }} | Peso: {{ selectedPokemon.weight }}</p>
+</div>

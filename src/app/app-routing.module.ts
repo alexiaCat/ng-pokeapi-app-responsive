@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './components/pages/home/home.component';
+import { PokemonTableComponent } from './components/pages/pokemon-table/pokemon-table.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: PokemonTableComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 
 ];

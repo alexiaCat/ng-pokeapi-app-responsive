@@ -5,15 +5,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { HomeComponent } from './components/pages/home/home.component';
+
+
+import { PokemonTableComponent } from './components/pages/pokemon-table/pokemon-table.component';
+import { PokemonDetailsComponent } from './components/pages/pokemon-details/pokemon-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    FooterComponent,
-    HomeComponent
+    PokemonTableComponent,
+    PokemonDetailsComponent
   ],
   imports: [
     BrowserModule,

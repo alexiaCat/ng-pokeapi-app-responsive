@@ -1,43 +1,73 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class PokemonService {
+  private baseUrl = 'https://pokeapi.co/api/v2/pokemon';
+  private selectedPokemonSubject = new BehaviorSubject<any>(null);
+  selectedPokemon$: Observable<any> = this.selectedPokemonSubject.asObservable();
 
   pokemons: any[] = [];
+  private pokemonFilter: any[] = [];
+  private filteredPokemonsSubject = new BehaviorSubject<any[]>([]);
+  filteredPokemons$: Observable<any[]> = this.filteredPokemonsSubject.asObservable();
+  favoritePokemon: any | null = null;
 
   constructor(private http: HttpClient) {
-    this.loadPokemons();
+
   }
 
-  private loadPokemons() {
-    this.http.get<any>('https://pokeapi.co/api/v2/pokemon?limit=16')
-      .subscribe(
-        (res: any) => {
-          const results = res.results;
-          for (const result of results) {
-            this.http.get<any>(result.url)
-              .subscribe(
-                (pokemonData: any) => {
-                  this.pokemons.push({
-                    name: pokemonData.name,
-                    image: pokemonData.sprites.front_default
-                  });
-                },
-                (error: any) => {
-                  console.error('Error al cargar los detalles del Pokemon:', error);
-                }
-              );
-          }
-        },
-        (error: any) => {
-          console.error('Error al cargar los Pokemons:', error);
-        }
-      );
+  getPokemons(offset: number, limit: number) {
+    const url = `${this.baseUrl}?offset=${offset}&limit=${limit}`;
+    return this.http.get<any>(url);
   }
 
+  setSelectedPokemon(pokemon: any): void {
+    this.selectedPokemonSubject.next(pokemon);
+  }
 
+  getPokemonDetails(url: string): Observable<any> {
+    return this.http.get<any>(url);
+  }
   
+  setFavoritePokemon(pokemon: any) {
+    this.favoritePokemon = pokemon;
+  }
+
+  getFavoritePokemon(): any | null {
+    return this.favoritePokemon;
+  }
+
+  toggleFavoritePokemon(pokemon: any) {
+    if (this.favoritePokemon === pokemon) {
+      this.favoritePokemon = null; 
+    } else {
+      this.favoritePokemon = pokemon; 
+    }
+  }
+  
+
+
+  private applyFilterAndSearch(searchText: string) {
+    searchText = searchText.toLocaleLowerCase();
+    console.log(this.pokemons);
+    if (searchText === '') {
+      this.filteredPokemonsSubject.next(this.pokemons);
+    } else {
+      this.pokemonFilter = this.pokemons.filter(pok => {
+        const nameLower = pok.name.toLocaleLowerCase();
+        return nameLower.indexOf(searchText) >= 0;
+      });
+      this.filteredPokemonsSubject.next(this.pokemonFilter);
+    }
+  }
+
+  setFilterAndSearch(searchText: string) {
+    this.applyFilterAndSearch(searchText);
+  }
+
 }
