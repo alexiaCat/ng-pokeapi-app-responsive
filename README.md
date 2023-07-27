@@ -1,18 +1,24 @@
 # NgPokeapiAppResponsive
 
-Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) versión 16.1.3.
+Este proyecto fue generado con Angular CLI versión 16.1.3 y utiliza Tailwind CSS para los estilos y diseño de la interfaz.
 
-## Servidor de desarrollo
 
-Ejecuta `npm install` para instalar las dependencias.
+## Descripción de la Aplicación
 
-Para iniciar el servidor de desarrollo, ejecuta el siguiente comando: `ng serve`
+Esta aplicación responsive utiliza la API de PokeAPI (https://pokeapi.co/) para mostrar información detallada sobre diferentes Pokémon. 
 
-Luego, navega a `http://localhost:4200/`. La aplicación se recargará automáticamente si realizas cambios en los archivos fuente.
+
+## Instrucciones de Uso
+
+1. Instalación de Dependencias: Para comenzar, ejecuta `npm install` en la raíz del proyecto para instalar todas las dependencias necesarias.
+
+2. Inicio del Servidor de Desarrollo: Una vez instaladas las dependencias, inicia el servidor de desarrollo con el siguiente comando: `ng serve -o`. Luego, accede a la aplicación en tu navegador web a través de `http://localhost:4200/`. La aplicación se recargará automáticamente si realizas cambios en los archivos fuente.
+
 
 ## Consumo de la API PokeAPI
 
-Esta aplicación utiliza la API de PokeAPI para obtener datos sobre los Pokémon. Al cargar la aplicación, se realiza una solicitud HTTP a la API de PokeAPI para obtener información sobre los Pokémon disponibles. Luego, se muestran los nombres e imágenes de los Pokémon en la interfaz de usuario mediante tarjetas (cards).
+La aplicación realiza solicitudes HTTP a la API de PokeAPI (https://pokeapi.co/) para obtener información sobre los Pokémon. La API proporciona datos detallados sobre los Pokémon, incluidos sus nombres, imágenes, altura, peso y más.
+
 
 ## Ayuda adicional
 

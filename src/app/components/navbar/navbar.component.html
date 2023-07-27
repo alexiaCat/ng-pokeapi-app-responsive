@@ -4,10 +4,10 @@
       <img src="../../../assets/img/Poke.png" alt="Mi Logo" class="w-[190px] h-auto ml-2">
     </a>
 
-    <div class="flex items-center bg-white mr-2">
-      <ng-container  *ngIf="_pokemons.favoritePokemon">
-        <img [src]="_pokemons.favoritePokemon.sprites.front_default" [alt]="_pokemons.favoritePokemon.name" class="w-30 h-30 rounded-full">
-        <span class="text-black font-bold  text-[14px] mr-2">{{ _pokemons.favoritePokemon.name }}</span>
+    <div (click)="openPokemonDialog(pokemonService.favoritePokemon)" class="flex items-center cursor-pointer bg-slate-200 rounded-lg mr-2" >
+      <ng-container  *ngIf="pokemonService.favoritePokemon">
+        <img [src]="pokemonService.favoritePokemon.sprites.front_default" [alt]="pokemonService.favoritePokemon.name" class="w-30 h-30 rounded-full">
+        <span class="text-black font-bold  text-[14px] mr-2">{{ pokemonService.favoritePokemon.name }}</span>
       </ng-container>
     </div>
 

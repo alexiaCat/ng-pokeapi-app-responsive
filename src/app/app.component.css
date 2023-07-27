@@ -10,3 +10,11 @@
     max-width: none;
 }
 
+::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #F6830F;
+    border-radius: 5px;
+  }

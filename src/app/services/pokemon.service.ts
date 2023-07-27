@@ -10,9 +10,7 @@ export class PokemonService {
   private baseUrl = 'https://pokeapi.co/api/v2/pokemon';
   private selectedPokemonSubject = new BehaviorSubject<any>(null);
   selectedPokemon$: Observable<any> = this.selectedPokemonSubject.asObservable();
-
   pokemons: any[] = [];
-  private pokemonFilter: any[] = [];
   private filteredPokemonsSubject = new BehaviorSubject<any[]>([]);
   filteredPokemons$: Observable<any[]> = this.filteredPokemonsSubject.asObservable();
   favoritePokemon: any | null = null;
@@ -25,6 +23,13 @@ export class PokemonService {
     const url = `${this.baseUrl}?offset=${offset}&limit=${limit}`;
     return this.http.get<any>(url);
   }
+
+
+  getAllPokemons(){
+    const url = `${this.baseUrl}?limit=2500`;
+    return this.http.get<any>(url);
+  }
+
 
   setSelectedPokemon(pokemon: any): void {
     this.selectedPokemonSubject.next(pokemon);
@@ -48,26 +53,6 @@ export class PokemonService {
     } else {
       this.favoritePokemon = pokemon; 
     }
-  }
-  
-
-
-  private applyFilterAndSearch(searchText: string) {
-    searchText = searchText.toLocaleLowerCase();
-    console.log(this.pokemons);
-    if (searchText === '') {
-      this.filteredPokemonsSubject.next(this.pokemons);
-    } else {
-      this.pokemonFilter = this.pokemons.filter(pok => {
-        const nameLower = pok.name.toLocaleLowerCase();
-        return nameLower.indexOf(searchText) >= 0;
-      });
-      this.filteredPokemonsSubject.next(this.pokemonFilter);
-    }
-  }
-
-  setFilterAndSearch(searchText: string) {
-    this.applyFilterAndSearch(searchText);
   }
 
 }

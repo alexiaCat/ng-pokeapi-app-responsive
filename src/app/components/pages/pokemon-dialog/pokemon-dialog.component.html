@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>{{ data.name | uppercase  }}</h2>
+<div mat-dialog-content >
+  <img [src]="data.sprites?.front_default" alt="Pokemon Image" class="w-32 h-32">
+  <p><b>Experiencia:</b> {{ data.base_experience }} EXP</p>
+  <p><b>Altura: </b>{{ data.height }} m.</p>
+  <p><b>Peso: </b>{{ data.weight }} Kg.</p>
+  <p><b>Tipo: </b> {{ data.types[0]?.type.name }}</p>
+</div>
+
+
