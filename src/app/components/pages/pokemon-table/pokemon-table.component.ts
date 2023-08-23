@@ -14,6 +14,10 @@ export class PokemonTableComponent implements OnInit, OnDestroy {
   filterValue = '';
   filteredPokemons: any[] = [];
   sortedResults: any[] = [];
+  allPokemons: any[] = [];
+  totalPages: number = 0;
+  currentPage: number = 1;
+  visiblePages: number = 10;
 
 
   private filteredPokemonsSubscription: Subscription | undefined;
@@ -48,6 +52,9 @@ export class PokemonTableComponent implements OnInit, OnDestroy {
     this.pokeService.getAllPokemons()
       .subscribe((data: any) => {
         const pokemonNames = data.results.map((pokemon: any) => pokemon.name);
+        this.allPokemons = data.results;
+        this.totalPages = Math.ceil(this.allPokemons.length / this.limit);
+        this.applyFilterAndSearch(this.filterValue);
   
         const countByLetter: {[letter: string]: number} = {};
         for (const name of pokemonNames) {
@@ -62,16 +69,7 @@ export class PokemonTableComponent implements OnInit, OnDestroy {
   }
   
 
-  changePage(offset: number) {
-    this.offset = offset;
-    this.loadPokemons();
-  }
 
-  previousPage() {
-    if (this.offset - this.limit >= 0) {
-      this.changePage(this.offset - this.limit);
-    }
-  }
 
   onPokemonClicked(pokemon: any): void {
     this.pokeService.getPokemonDetails(pokemon.url)
@@ -94,9 +92,9 @@ export class PokemonTableComponent implements OnInit, OnDestroy {
   applyFilterAndSearch(searchText: string) {
     searchText = searchText.toLocaleLowerCase();
     if (searchText === '') {
-      this.filteredPokemons = this.pokemons;
+      this.filteredPokemons = this.pokemons; // Solo muestra los paginados
     } else {
-      this.filteredPokemons = this.pokemons.filter(pok => {
+      this.filteredPokemons = this.allPokemons.filter(pok => {
         const nameLower = pok.name.toLocaleLowerCase();
         return nameLower.includes(searchText);
       });
@@ -106,5 +104,56 @@ export class PokemonTableComponent implements OnInit, OnDestroy {
   setFilterAndSearch(searchText: string) {
     this.filterValue = searchText;
     this.applyFilterAndSearch(searchText);
+  }
+
+  generatePages(): number[] {
+    let startPage: number;
+    let endPage: number;
+  
+    if (this.totalPages <= this.visiblePages) {
+      startPage = 1;
+      endPage = this.totalPages;
+    } else {
+      let middle = Math.ceil(this.visiblePages / 2);
+  
+      if (this.currentPage <= middle) {
+        startPage = 1;
+        endPage = this.visiblePages;
+      } else if (this.currentPage + middle >= this.totalPages) {
+        startPage = this.totalPages - this.visiblePages + 1;
+        endPage = this.totalPages;
+      } else {
+        startPage = this.currentPage - middle + 1;
+        endPage = this.currentPage + middle - 1;
+      }
+    }
+  
+    return Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
+  }
+
+  changePage(offset: number): void {
+    this.offset = offset;
+    this.loadPokemons();
+  }
+  
+  changePageTo(page: number): void {
+    this.currentPage = page;
+    this.changePage((page - 1) * this.limit);
+  }
+  
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.changePageTo(this.currentPage + 1);
+    }
+  }
+  
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.changePageTo(this.currentPage - 1);
+    }
+  }
+  
+  isPageActive(page: number): boolean {
+    return this.offset / this.limit + 1 === page;
   }
 }

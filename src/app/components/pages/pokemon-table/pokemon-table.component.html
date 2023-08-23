@@ -1,6 +1,6 @@
 <div class="flex flex-col md:flex-row">
   <div class="md:w-[60%] w-[100%] overflow-auto p-4">
-    <h1 class="text-center text-white mt-2 underline decoration-red-700">Tabla paginada de Pokemons con búsqueda</h1>
+    <h1 class="text-center text-white mt-2 underline decoration-red-700">Tabla paginada de Pokémon con búsqueda.</h1>
 
     <div class="relative pb-2">
       <input type="text" (input)="setFilterAndSearch(txtBuscar.value)"
@@ -31,32 +31,27 @@
 
 
 
-    <div class="flex flex-col items-center mt-2 xs:mt-0">
-      <div class="flex items-center justify-between w-full">
-        <button (click)="previousPage()"
-          class="flex items-center px-3 h-8 text-sm font-medium text-white bg-red-500 rounded-l hover:bg-red-600 dark:bg-red-700 dark:border-red-700 dark:text-red-300 dark:hover:bg-red-800 dark:hover:text-white">
-          <svg class="w-3.5 h-3.5 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-            viewBox="0 0 14 10">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M13 5H1m0 0 4 4M1 5l4-4" />
-          </svg>
-          Anterior
-        </button>
-        <button (click)="changePage(offset + limit)"
-          class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-red-500 border-0 border-l border-red-700 rounded-r hover:bg-red-600 dark:bg-red-700 dark:border-red-700 dark:text-red-300 dark:hover:bg-red-800 dark:hover:text-white">
-          Siguiente
-          <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-            viewBox="0 0 14 10">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M1 5h12m0 0L9 1m4 4L9 9" />
-          </svg>
-        </button>
-      </div>
+    <div class="flex flex-row justify-center mt-4">
+
+      <button (click)="previousPage()" class="px-3 py-1 mx-1 rounded-md bg-red-500 text-white hover:bg-red-600">
+        <-
+      </button>
+    
+
+      <button *ngFor="let page of generatePages()" 
+      (click)="changePageTo(page)"
+      [ngClass]="{'bg-blue-500': isPageActive(page), 'bg-red-500': !isPageActive(page)}"
+      class="px-3 py-1 mx-1 rounded-md text-white hover:bg-blue-600">
+  {{ page }}
+</button>
+
+      <button (click)="nextPage()" class="px-3 py-1 mx-1 rounded-md bg-red-500 text-white hover:bg-red-600">
+        ->
+      </button>
     </div>
 
 
-
-    <h1 class="underline text-white text-center  decoration-red-700">Conteo de Pokémon por letra inicial</h1>
+    <h1 class="underline text-white text-center  decoration-red-700 pt-[50px]">Conteo de Pokémon por letra inicial.</h1>
     <table class="table-auto w-full border-collapse border border-red-500 mt-4">
       <thead>
         <tr class="bg-red-500">
