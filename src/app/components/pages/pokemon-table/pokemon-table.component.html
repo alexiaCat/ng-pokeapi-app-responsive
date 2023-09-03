@@ -1,6 +1,9 @@
 <div class="flex flex-col md:flex-row">
   <div class="md:w-[60%] w-[100%] overflow-auto p-4">
-    <h1 class="text-center text-white mt-2 underline decoration-red-700">Tabla paginada de Pokémon con búsqueda.</h1>
+    <h1 class="text-center mt-2">
+      <span class="bg-red-500 px-2 font-bold py-1 text-dark rounded font-caveat">Tabla paginada de Pokémon con
+        búsqueda.</span>
+    </h1>
 
     <div class="relative pb-2">
       <input type="text" (input)="setFilterAndSearch(txtBuscar.value)"
@@ -31,27 +34,31 @@
 
 
 
-    <div class="flex flex-row justify-center mt-4">
+    <div class="flex flex-row justify-center mt-2  space-y-2 flex-wrap">
+      <a></a>
 
       <button (click)="previousPage()" class="px-3 py-1 mx-1 rounded-md bg-red-500 text-white hover:bg-red-600">
-        <-
+        &larr;
       </button>
-    
 
-      <button *ngFor="let page of generatePages()" 
-      (click)="changePageTo(page)"
-      [ngClass]="{'bg-blue-500': isPageActive(page), 'bg-red-500': !isPageActive(page)}"
-      class="px-3 py-1 mx-1 rounded-md text-white hover:bg-blue-600">
-  {{ page }}
-</button>
+
+      <button *ngFor="let page of generatePages()" (click)="changePageTo(page)"
+        [ngClass]="{'bg-blue-500': isPageActive(page), 'bg-red-500': !isPageActive(page)}"
+        class="px-3 py-1 mx-1 rounded-md text-white hover:bg-blue-600">
+        {{ page }}
+      </button>
 
       <button (click)="nextPage()" class="px-3 py-1 mx-1 rounded-md bg-red-500 text-white hover:bg-red-600">
-        ->
+        &rarr;
       </button>
     </div>
 
 
-    <h1 class="underline text-white text-center  decoration-red-700 pt-[50px]">Conteo de Pokémon por letra inicial.</h1>
+    <h1 class="text-center pt-[50px]">
+      <span class="bg-red-500 px-2 font-bold py-1 text-dark rounded font-caveat">Conteo de
+        Pokémon por letra inicial.</span>
+    </h1>
+
     <table class="table-auto w-full border-collapse border border-red-500 mt-4">
       <thead>
         <tr class="bg-red-500">

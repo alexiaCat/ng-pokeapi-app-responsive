@@ -92,7 +92,7 @@ export class PokemonTableComponent implements OnInit, OnDestroy {
   applyFilterAndSearch(searchText: string) {
     searchText = searchText.toLocaleLowerCase();
     if (searchText === '') {
-      this.filteredPokemons = this.pokemons; // Solo muestra los paginados
+      this.filteredPokemons = this.pokemons;
     } else {
       this.filteredPokemons = this.allPokemons.filter(pok => {
         const nameLower = pok.name.toLocaleLowerCase();
