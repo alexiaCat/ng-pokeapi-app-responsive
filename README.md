@@ -7,6 +7,9 @@ Este proyecto fue generado con Angular CLI versión 16.1.3 y utiliza Tailwind CS
 
 Esta aplicación responsive utiliza la API de PokeAPI (https://pokeapi.co/) para mostrar información detallada sobre diferentes Pokémon. 
 
+## Demo en vivo
+
+Accede a la aplicación en vivo aquí: [ReactGifify en GitHub Pages](https://alexiacat.github.io/ng-pokeapi-app-responsive/home)
 
 ## Instrucciones de Uso
 
