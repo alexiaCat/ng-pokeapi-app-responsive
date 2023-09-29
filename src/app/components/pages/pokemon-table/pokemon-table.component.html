@@ -1,75 +1,70 @@
 <div class="flex flex-col md:flex-row">
   <div class="md:w-[60%] w-[100%] overflow-auto p-4">
-    <h1 class="text-center mt-2">
-      <span class="bg-red-500 px-2 font-bold py-1 text-dark rounded font-caveat">Tabla paginada de Pokémon con
-        búsqueda.</span>
-    </h1>
-
     <div class="relative pb-2">
       <input type="text" (input)="setFilterAndSearch(txtBuscar.value)"
-        class="w-full px-4 py-2 rounded-l focus:outline-none focus:ring focus:border-blue-300"
+        class="w-full px-4 py-3 border border-dashed border-black rounded-md focus:outline-none focus:ring focus:border-blue-300"
         placeholder="Escribe el nombre del pokemón a buscar" #txtBuscar />
     </div>
 
 
-    <table class="table-auto w-full border-collapse border border-red-500">
+    <table class="table-auto w-full border-collapse border border-gray-100">
       <thead>
-        <tr class="bg-red-500">
-          <th class="w-2/3 px-4 py-2 border border-red-800 text-white">Nombre Pokémon</th>
-          <th class="w-1/3 px-4 py-2 border border-red-800 text-white">Marcar como favorito</th>
+        <tr class="bg-gray-200">
+          <th class="w-1/3 px-4 py-4 border border-gray-100 text-[#272727]">Nombre Pokémon</th>
+          <th class="w-1/3 px-4  border border-gray-100 text-[#272727]">Marcar como favorito</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let pokemon of filteredPokemons" class="bg-orange-200">
+        <tr *ngFor="let pokemon of filteredPokemons" class="bg-white">
           <td (click)="onPokemonClicked(pokemon)"
-            class="hover:font-bold px-4 py-2 border border-red-800 cursor-pointer">{{ pokemon.name }}</td>
-          <td (click)="toggleFavorite(pokemon)" class="px-4 py-2 border border-red-800 cursor-pointer">
-            <span class="flex justify-center items-center">
-              <i [style.color]="pokemon.isFavorite ? 'red' : 'white'" class="fas fa-heart"></i>
-            </span>
-          </td>
+            class="hover:font-bold px-4 py-2 border border-gray-100 cursor-pointer">{{ pokemon.name }}</td>
+            <td (click)="toggleFavorite(pokemon)" class="px-4 py-2 border border-gray-100 cursor-pointer">
+              <span class="flex justify-center items-center">
+                <i [style.color]="pokemon.isFavorite ? 'red' : 'black'" [class]="pokemon.isFavorite ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"></i>
+              </span>
+            </td>          
         </tr>
       </tbody>
     </table>
 
 
 
-    <div class="flex flex-row justify-center mt-2  space-y-2 flex-wrap">
+    <div class="flex flex-row justify-center py-1  space-y-2 flex-wrap bg-[#272727] rounded-md">
       <a></a>
 
-      <button (click)="previousPage()" class="px-3 py-1 mx-1 rounded-md bg-red-500 text-white hover:bg-red-600">
+      <button (click)="previousPage()" class="px-3 py-1 mx-1  border  text-white hover:bg-red-600">
         &larr;
       </button>
 
 
       <button *ngFor="let page of generatePages()" (click)="changePageTo(page)"
-        [ngClass]="{'bg-blue-500': isPageActive(page), 'bg-red-500': !isPageActive(page)}"
-        class="px-3 py-1 mx-1 rounded-md text-white hover:bg-blue-600">
+        [ngClass]="{'bg-blue-500': isPageActive(page), 'border': !isPageActive(page)}"
+        class="px-3 py-1 mx-1 min-w-[40px]   text-white hover:bg-blue-600">
         {{ page }}
       </button>
 
-      <button (click)="nextPage()" class="px-3 py-1 mx-1 rounded-md bg-red-500 text-white hover:bg-red-600">
+      <button (click)="nextPage()" class="px-3 py-1 mx-1 border text-white hover:bg-red-600">
         &rarr;
       </button>
     </div>
 
 
     <h1 class="text-center pt-[50px]">
-      <span class="bg-red-500 px-2 font-bold py-1 text-dark rounded font-caveat">Conteo de
+      <span class="underline decoration-blue-500 px-2 font-bold py-1 text-dark rounded font-caveat">Conteo de
         Pokémon por letra inicial.</span>
     </h1>
 
-    <table class="table-auto w-full border-collapse border border-red-500 mt-4">
+    <table class="table-auto w-full border-collapse border border-gray-100 mt-4 rounded-md">
       <thead>
-        <tr class="bg-red-500">
-          <th class="w-0.5 px-4 py-2 border border-red-800 text-white">Letra</th>
-          <th class="w-0.5 px-4 py-2 border border-red-800 text-white">Cantidad de Pokémon's</th>
+        <tr class="bg-gray-200">
+          <th class="w-0.5 px-4 py-4 border  border-gray-100 text-[#272727]">Letra</th>
+          <th class="w-0.5 px-4 border  border-gray-100 text-[#272727]">Cantidad de Pokémon's</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let result of sortedResults" class="bg-orange-200">
-          <td class="text-center hover:font-bold px-4 py-2 border border-red-800 cursor-pointer">{{ result[0] }}</td>
-          <td class="text-right px-4 py-2 border border-red-800">{{ result[1] }}</td>
+        <tr *ngFor="let result of sortedResults" class="bg-white">
+          <td class="text-center hover:font-bold px-4 py-2 border border-gray-100 cursor-pointer">{{ result[0] }}</td>
+          <td class="text-right px-4 py-2 border border-gray-100">{{ result[1] }}</td>
         </tr>
       </tbody>
     </table>
@@ -78,7 +73,7 @@
 
   </div>
 
-  <div class="md:w-[35%] w-[100%] md:mt-[160px] mt-[20px] order-first md:order-last">
+  <div class="md:w-[1/3] w-[100%] flex justify-center  md:mt-[160px] mt-[20px] order-first md:order-last">
     <app-pokemon-details></app-pokemon-details>
   </div>
 </div>

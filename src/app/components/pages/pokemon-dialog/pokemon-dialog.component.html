@@ -1,10 +1,8 @@
-<h2 mat-dialog-title>{{ data.name | uppercase  }}</h2>
-<div mat-dialog-content >
+<h2 mat-dialog-title class="text-white rounded-xl text-center">{{ data.name | uppercase }}</h2>
+<div mat-dialog-content class="bg-[#272727] text-white  p-2">
   <img [src]="data.sprites?.front_default" alt="Pokemon Image" class="w-32 h-32">
-  <p><b>Experiencia:</b> {{ data.base_experience }} EXP</p>
-  <p><b>Altura: </b>{{ data.height }} m.</p>
-  <p><b>Peso: </b>{{ data.weight }} Kg.</p>
-  <p><b>Tipo: </b> {{ data.types[0]?.type.name }}</p>
+  <p class="text-white"><b>Experiencia:</b> {{ data.base_experience }} EXP</p>
+  <p class="text-white"><b>Altura:</b> {{ data.height }} m.</p>
+  <p class="text-white"><b>Peso:</b> {{ data.weight }} Kg.</p>
+  <p class="text-white"><b>Tipo:</b> {{ data.types[0]?.type.name }}</p>
 </div>
-
-

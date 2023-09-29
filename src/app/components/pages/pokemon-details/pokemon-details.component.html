@@ -1,13 +1,17 @@
+
 <ng-container *ngIf="!selectedPokemon; else pokemonDetails">
-  <p class="text-white text-[25px] m-2 p-4">Click a el nombre de un pokemón para ver sus detalles</p>
+  <div class="bg-slate-300 rounded-lg w-[260px]">
+      <p class="text-gray-700 text-[21px] m-2 p-4">Da click a el nombre de un pokemón para ver sus detalles</p>
+  </div>
+
 </ng-container>
 
 <ng-template #pokemonDetails>
   <div [ngClass]="getPokemonColorClass(selectedPokemon.types[0]?.type.name)" 
-    class="shadow-md rounded-lg p-2 mx-4 md:mx-0" *ngIf="selectedPokemon">
+    class="shadow-xl shadow-cyan-500/50 rounded-lg border  border-black p-4 mx-4 md:mx-0" *ngIf="selectedPokemon">
     <div class="flex justify-center">
       <img [src]="selectedPokemon.sprites?.other?.dream_world?.front_default" alt="Pokemon"
-        class="w-[180px] md:w-[300px] h-auto object-contain mb-4">
+        class="w-[180px] md:w-[300px] md:max-h-full max-h-[180px] h-auto object-contain mb-4">
     </div>
 
     <h2 class="text-[40px] font-bold  text-center">{{ selectedPokemon.name | uppercase }}</h2>
@@ -21,8 +25,12 @@
       </ng-container>
     </div>
 
-    <p class="text-black font-bold text-center pt-2 text-sm">Experiencia: {{ selectedPokemon.base_experience }} EXP | Altura: {{
+    <div class="bg-slate-100 rounded-sm mt-2">
+          <p class="text-black font-bold text-center text-sm">Experiencia: {{ selectedPokemon.base_experience }} EXP | Altura: {{
       selectedPokemon.height }} m. | Peso: {{ selectedPokemon.weight }} Kg.</p>
+    </div>
+
     
   </div>
 </ng-template>
+

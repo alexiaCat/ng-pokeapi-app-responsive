@@ -1,5 +1,5 @@
 .bg-poke {
-    background-image: url('../assets/img/bg-poke.jpg');
+    background-image: url('/assets/img/bg-poke.jpg');
     background-size: cover;
 
 }
